@@ -1,0 +1,30 @@
+{
+    "name": "sergei-tsel/simpledynamic-tablemap",
+    "type": "project",
+    "description": "Tablemap on Simpledynamic framework",
+    "keywords": ["simple", "dynamic"],
+    "license": "MIT",
+    "require-dev": {
+        "vimeo/psalm": "^6.16.1",
+        "symplify/easy-coding-standard": "^13.0.4",
+        "rector/rector": "^2.3.9"
+    },
+    "require": {
+        "php": "^8.5",
+        "ext-simplexml": "*",
+        "ext-yaml": "*",
+        "ext-mbstring": "*",
+        "ext-fileinfo": "*",
+        "ext-uri": "*",
+        "sergei-tsel/simpledynamic": "dev-main"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "cli\\": "cli/",
+            "Config\\": "config/",
+            "Framework\\": "framework/",
+            "public\\": "public/"
+        }
+    }
+}

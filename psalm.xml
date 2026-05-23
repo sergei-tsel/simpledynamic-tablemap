@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<psalm phpVersion="8.5"
+    errorLevel="1"
+    resolveFromConfigFile="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+    findUnusedCode="true"
+>
+<projectFiles>
+        <directory name="config" />
+        <directory name="framework" />
+        <directory name="public" />
+        <ignoreFiles>
+            <directory name="hooks" />
+            <directory name="logs" />
+            <directory name="vendor" />
+        </ignoreFiles>
+    </projectFiles>
+</psalm>

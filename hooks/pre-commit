@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+# Получаем список изменённых файлов в текущем коммите
+FILES=$(git diff --cached --name-only --diff-filter=ACM --relative)
+
+# Проверяем, есть ли изменённые файлы
+if [ -z "$FILES" ]; then
+  echo "🟢 Нет изменённых файлов."
+  exit 0
+fi
+
+# Проверка с помощью Rector
+echo "🔹 Rector Check:"
+/usr/bin/php vendor/bin/rector process --dry-run --config=rector.php $FILES
+if [ $? -ne 0 ]; then
+  echo "🔴 Ошибка при проверке Rector!"
+  exit 1
+else
+  echo "🟢 Rector OK"
+fi
+
+# Проверка с помощью Psalm
+echo "🔸 Psalm Check:"
+git add .psalm/baseline.xml
+/usr/bin/php vendor/bin/psalm --config=psalm.xml --output-format=github $FILES
+if [ $? -ne 0 ]; then
+  echo "🔴 Ошибка при проверке Psalm!"
+  exit 1
+else
+  echo "🟢 Psalm OK"
+fi
+
+# Проверка с помощью ECS
+echo "🔹 ECS Check:"
+/usr/bin/php vendor/bin/ecs check --fix --config=ecs.php $FILES
+if [ $? -ne 0 ]; then
+  echo "🔴 Ошибка при проверке ECS!"
+  exit 1
+else
+  MODIFIED_FILES=$(git diff --name-only --diff-filter=M)
+
+  if [[ ! -z "${MODIFIED_FILES}" ]]; then
+    git add ${MODIFIED_FILES}
+  fi
+
+  echo "🟢 ECS OK"
+fi
+
+exit 0

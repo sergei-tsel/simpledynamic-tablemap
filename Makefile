@@ -4,6 +4,18 @@ start:
 cli-list:
 	php cli/exec.php list
 
+migrate-create-db:
+	php cli/exec.php migrate:create-db
+
+migrate-run:
+	php cli/exec.php migrate:run
+
+migrate-rollback-all:
+	php cli/exec.php migrate:rollback
+
+migrate-rollback-one:
+	php cli/exec.php migrate:rollback --batch --last-count=1
+
 ecs:
 	vendor/bin/ecs check --fix
 

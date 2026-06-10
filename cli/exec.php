@@ -6,6 +6,7 @@ require __DIR__ . '/../vendor/autoload.php';
 
 use Simpledynamic\Services\Configuration\App;
 use Simpledynamic\Services\CLI\Command;
+use Simpledynamic\Services\CLI\CommandLineManager;
 
 if (PHP_SAPI !== 'cli' || !isset($_SERVER['argv']) || count($_SERVER['argv']) < 2) {
     exit(1);
@@ -21,44 +22,35 @@ if (!is_array($commands)) {
     exit(1);
 }
 
-if ($_SERVER['argv'][1] === 'list') {
-    foreach ($commands as $name => $command) {
-        if (is_string($command)) {
-            echo $name . ' - ' . $command . PHP_EOL;
-        }
+$name = $_SERVER['argv'][1];
 
-        if (is_array($command)) {
-            /** @var class-string[] $command */
-            foreach ($command as $key => $value) {
-                if ($key === 0) {
-                    echo $name . ' - ' . $value . PHP_EOL;
-                } else {
-                    echo '     - ' . $value . PHP_EOL;
-                }
-            }
-        }
-    }
+/**
+ * @var array<array-key, class-string<Command>> $commands
+ */
+if ($name === 'list') {
+    new CommandLineManager()->echoList(commands: $commands);
 
     exit(0);
 }
 
-if (!isset($commands[$_SERVER['argv'][1]])) {
+if (!isset($commands[$name])) {
     exit(1);
 }
 
-/**
- * @var array<array-key, array<array-key, class-string<Command>>|class-string<Command>> $commands
- */
-$commandName = $commands[$_SERVER['argv'][1]];
+if (isset($_SERVER['argv'][2]) && ($_SERVER['argv'][2] === '--help' || $_SERVER['argv'][2] === '-h')) {
+    new CommandLineManager()->echoHelp(name: $name, command: $commands[$name]);
 
-if (is_array($commandName)) {
-    foreach ($commandName as $name) {
-        if (class_exists($name) && is_subclass_of($name, Command::class)) {
-            $name::run();
-        }
+    exit(0);
+}
+
+$command = $commands[$name];
+
+if (class_exists($command) && is_subclass_of($command, Command::class)) {
+    try {
+        $command::run();
+    } catch (\Exception $e) {
+        echo $e->getMessage();
     }
-} elseif (class_exists($commandName) && is_subclass_of($commandName, Command::class)) {
-    $commandName::run();
 }
 
 exit(0);

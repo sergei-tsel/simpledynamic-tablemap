@@ -22,7 +22,11 @@ class App extends Config
     #[\Override]
     protected static array $local     = [
         'locale'          => 'en',
-        'commands'        => [],
+        'commands'        => [
+            'migrate:create-db' => \App\Storage\Migration\CreateDatabase::class,
+            'migrate:run'       => \App\Storage\Migration\Run::class,
+            'migrate:rollback'  => \App\Storage\Migration\Rollback::class,
+        ],
         'providers'       => [
             \Framework\Providers\AppServiceProvider::class,
         ],

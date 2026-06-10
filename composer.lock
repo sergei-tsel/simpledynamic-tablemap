@@ -2432,12 +2432,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sergei-tsel/simpledynamic.git",
-                "reference": "767856345934b8c23ab9f74b24cbce5f146eb636"
+                "reference": "4c8f39c53d8d66a600b39840000d816c36ae8486"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sergei-tsel/simpledynamic/zipball/767856345934b8c23ab9f74b24cbce5f146eb636",
-                "reference": "767856345934b8c23ab9f74b24cbce5f146eb636",
+                "url": "https://api.github.com/repos/sergei-tsel/simpledynamic/zipball/4c8f39c53d8d66a600b39840000d816c36ae8486",
+                "reference": "4c8f39c53d8d66a600b39840000d816c36ae8486",
                 "shasum": ""
             },
             "require": {
@@ -2478,7 +2478,7 @@
                 "issues": "https://github.com/sergei-tsel/simpledynamic/issues",
                 "source": "https://github.com/sergei-tsel/simpledynamic/tree/main"
             },
-            "time": "2026-05-29T16:25:22+00:00"
+            "time": "2026-06-10T18:27:28+00:00"
         },
         {
             "name": "symfony/clock",

@@ -21,11 +21,11 @@ class ORM extends Config
      */
     #[\Override]
     protected static array  $local               = [
-        'driver'    => 'mysql',
+        'driver'    => 'pgsql',
         'host'      => 'localhost',
-        'database'  => 'database',
-        'username'  => 'root',
-        'password'  => 'password',
+        'database'  => 'tablemap',
+        'username'  => 'postgres',
+        'password'  => 'postgres',
         'charset'   => 'utf8',
         'collation' => 'utf8_unicode_ci',
         'prefix'    => '',
@@ -40,7 +40,9 @@ class ORM extends Config
      * @var string[]
      */
     protected static array $migrationDirectories = [
-        __DIR__ . '/../framework/Integrations/Eloquent/Migrations',
+        __DIR__ . '/../app/Storage/Migration',
+        __DIR__ . '/../app/Storage/User',
+        __DIR__ . '/../app/Storage/Page',
     ];
 
     public static function getMigrationDirectories(): array

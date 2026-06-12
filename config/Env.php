@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace config;
+namespace Config;
 
 use Simpledynamic\Services\Configuration\Config;
 

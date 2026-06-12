@@ -11,16 +11,16 @@ use stdClass;
 /**
  * Модель сущности "Страница"
  *
- * @property ?int             $id
- * @property int             $userId
- * @property int|null        $pageId
- * @property string          $title
- * @property string|null     $description
- * @property array|null      $layout
- * @property Carbon|null     $earlyDatedAt
- * @property Carbon|null     $lateDatedAt
- * @property ?Carbon          $createdAt
- * @property ?Carbon          $updatedAt
+ * @property ?int        $id
+ * @property int         $userId
+ * @property int|null    $pageId
+ * @property string      $title
+ * @property string|null $description
+ * @property array|null  $layout
+ * @property Carbon|null $earlyDatedAt
+ * @property Carbon|null $lateDatedAt
+ * @property ?Carbon     $createdAt
+ * @property ?Carbon     $updatedAt
  */
 class PageModel extends Model
 {
@@ -51,7 +51,7 @@ class PageModel extends Model
      *     page_id?:        ?int,
      *     title:           string,
      *     description?:    ?string,
-     *     layout?:         ?string,
+     *     layout?:         ?array|string,
      *     early_dated_at?: ?string,
      *     late_dated_at?:  ?string,
      *     created_at?:     string,
@@ -68,7 +68,7 @@ class PageModel extends Model
              *     page_id?:        ?int,
              *     title:           string,
              *     description?:    ?string,
-             *     layout?:         ?string,
+             *     layout?:         ?array|string,
              *     early_dated_at?: ?string,
              *     late_dated_at?:  ?string,
              *     created_at?:     string,
@@ -83,7 +83,13 @@ class PageModel extends Model
         $this->pageId       = $attributes['page_id'] ?? null;
         $this->title        = $attributes['title'];
         $this->description  = $attributes['description'] ?? null;
-        $this->layout       = isset($attributes['layout']) ? (array) json_decode($attributes['layout']) : [];
+        $this->layout       = isset($attributes['layout'])
+            ? match (true) {
+                is_array($attributes['layout'])                                          => $attributes['layout'],
+                is_string($attributes['layout']) && json_validate($attributes['layout']) => (array) json_decode($attributes['layout']),
+                default                                                                  => [],
+            }
+        : [];
         $this->earlyDatedAt = Carbon::parse($attributes['early_dated_at'] ?? null);
         $this->lateDatedAt  = Carbon::parse($attributes['late_dated_at'] ?? null);
         $this->createdAt    = Carbon::parse($attributes['created_at'] ?? null);

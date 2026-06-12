@@ -12,10 +12,10 @@ use stdClass;
 /**
  * Билдер сущности "Страница"
  */
-readonly class PageBuilder extends Builder
+class PageBuilder extends Builder
 {
     public function __construct(
-        private DatabaseManager $manager,
+        private readonly DatabaseManager $manager,
     ) {
     }
 

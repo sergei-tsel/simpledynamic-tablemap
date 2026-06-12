@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace config;
+namespace Config;
 
-use Simpledynamic\Integrations\Twig\TwigView;
 use Simpledynamic\Base\Controller\Route;
 use Simpledynamic\Services\Arrays\NotationManager;
 use Simpledynamic\Services\Configuration\Config;
@@ -36,7 +35,9 @@ class Routes extends Config
     /**
      * @var string[]
      */
-    protected static array $routers   = [];
+    protected static array $routers   = [
+        \App\Http\Routes\TestRouter::class,
+    ];
 
     protected static ?Uri $uri = null;
 
@@ -47,15 +48,7 @@ class Routes extends Config
      */
     public static function get(): array
     {
-        $routes = [
-            'welcome' => [
-                'method' => 'GET',
-                'path'   => '/',
-                'action' => function (): void {
-                    echo new TwigView('welcome.php.twig')->render();
-                },
-            ],
-        ];
+        $routes = [];
 
         if (self::$routers !== []) {
             foreach (self::$routers as $router) {

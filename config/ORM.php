@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace config;
+namespace Config;
 
 use Illuminate\Database\Capsule\Manager;
 use Simpledynamic\Services\Configuration\Config;

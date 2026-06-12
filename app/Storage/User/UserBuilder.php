@@ -11,10 +11,10 @@ use stdClass;
 /**
  * Билдер сущности "Пользователь"
  */
-readonly class UserBuilder extends Builder
+class UserBuilder extends Builder
 {
     public function __construct(
-        private DatabaseManager $manager,
+        private readonly DatabaseManager $manager,
     ) {
     }
 

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace config;
+namespace Config;
 
 use Doctrine\ODM\MongoDB\Configuration;
 use Doctrine\ODM\MongoDB\DocumentManager;

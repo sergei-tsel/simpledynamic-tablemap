@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace Framework\Providers;
 
-use config\App as AppConfig;
-use config\Auth as AuthConfig;
-use config\Cookies as CookiesConfig;
-use config\Env as EnvConfig;
-use config\Headers as HeadersConfig;
-use config\ODM as ODMConfig;
-use config\ORM as ORMConfig;
-use config\Routes as RoutesConfig;
-use config\Session as SessionConfig;
+use Config\App as AppConfig;
+use Config\Auth as AuthConfig;
+use Config\Cookies as CookiesConfig;
+use Config\Env as EnvConfig;
+use Config\Headers as HeadersConfig;
+use Config\ODM as ODMConfig;
+use Config\ORM as ORMConfig;
+use Config\Routes as RoutesConfig;
+use Config\Session as SessionConfig;
 use Doctrine\ODM\MongoDB\DocumentManager;
 use Illuminate\Database\DatabaseManager;
 use Simpledynamic\Providers\ServiceProvider;
